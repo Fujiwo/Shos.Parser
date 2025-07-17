@@ -1,7 +1,4 @@
-﻿using System;
-using System.Globalization;
-
-namespace Shos.Parser;
+﻿namespace Shos.Parser;
 
 public static class EnumerableExtensions
 {
