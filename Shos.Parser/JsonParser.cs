@@ -188,8 +188,9 @@ public class JsonParser
         foreach (var parameter in parameters) {
             // Attempt to find a matching key-value pair for this parameter
             // The matching is case-insensitive to be user-friendly
-            var matchedValueText = keyValueTexts.FirstOrDefault(keyValueText =>
-                (parameter?.Name?.ToLower() ?? "") == keyValueText.key.ToLower());
+            var matchedValueText = keyValueTexts.FirstOrDefault(
+                keyValueText => (parameter?.Name ?? "").Equals(keyValueText.key, StringComparison.OrdinalIgnoreCase)
+            );
 
             // Check if we found a matching key-value pair
             if (matchedValueText != default) {

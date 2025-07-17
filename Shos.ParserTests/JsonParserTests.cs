@@ -294,7 +294,7 @@
         public void ParseKeyValueArrayTest_EmptyArray()
         {
             // Test with empty key-value array
-            var keyValues = new (string, string)[0];
+            (string, string)[] keyValues = [];
             var person = JsonParser.Parse<Person>(keyValues);
             
             Assert.IsNull(person);

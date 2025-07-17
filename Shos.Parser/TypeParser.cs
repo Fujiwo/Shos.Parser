@@ -86,10 +86,8 @@ public class TypeParser
     public static object? Parse(Type type, string text)
     {
         // Input validation - ensure required parameters are not null
-        if (type is null)
-            throw new ArgumentNullException(nameof(type));
-        if (text is null)
-            throw new ArgumentNullException(nameof(text));
+        ArgumentNullException.ThrowIfNull(type);
+        ArgumentNullException.ThrowIfNull(text);
 
         // Handle nullable types by extracting the underlying type
         // For example: int? -> int, DateTime? -> DateTime

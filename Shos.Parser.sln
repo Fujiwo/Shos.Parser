@@ -9,6 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shos.ParserTests", "Shos.Pa
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{DDB4EF12-CC4E-5E88-E6FC-71A802F4DE97}"
 	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
 		LICENSE.txt = LICENSE.txt
 		README.md = README.md
 	EndProjectSection
