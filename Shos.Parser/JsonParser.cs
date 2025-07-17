@@ -128,30 +128,6 @@ public class JsonParser
         return default;
     }
 
-    static void SetProperties(object item, (string key, object value)[] parameterKeyValues, (string key, string valueText)[] keyValueTexts)
-    {
-        var parameterValues = parameterKeyValues.Select(parameterKeyValues => parameterKeyValues.key).ToArray();
-        var remainKeyValueTexts = keyValueTexts.Where(keyValueText => !parameterValues.Contains(keyValueText.key));
-        remainKeyValueTexts.ForEach(remainKeyValueText => SetProperty(item, remainKeyValueText));
-    }
-
-    static void SetProperty(object item, (string key, string valueText) keyValueText)
-    {
-        var type = item.GetType();
-        var property = type.GetProperty(keyValueText.key, BindingFlags.Instance | BindingFlags.Public | BindingFlags.SetProperty);
-        if (property is null)
-            property = type.GetProperty(keyValueText.key.ToPascalCase(), BindingFlags.Instance | BindingFlags.Public | BindingFlags.SetProperty);
-
-        if (property is null)
-            return;
-
-        var (canParse, value) = TypeParser.TryParse(property.PropertyType, keyValueText.valueText);
-        if (!canParse || value is null)
-            return;
-
-        property.SetValue(item, value);
-    }
-
     /// <summary>
     /// Creates parameter values for a specific constructor by matching key-value pairs to parameter names.
     /// </summary>
@@ -226,5 +202,29 @@ public class JsonParser
 
         // All parameters were successfully matched and parsed
         return (true, keyValues.ToArray());
+    }
+
+    static void SetProperties(object item, (string key, object value)[] parameterKeyValues, (string key, string valueText)[] keyValueTexts)
+    {
+        var parameterValues = parameterKeyValues.Select(parameterKeyValues => parameterKeyValues.key).ToArray();
+        var remainKeyValueTexts = keyValueTexts.Where(keyValueText => !parameterValues.Contains(keyValueText.key));
+        remainKeyValueTexts.ForEach(remainKeyValueText => SetProperty(item, remainKeyValueText));
+    }
+
+    static void SetProperty(object item, (string key, string valueText) keyValueText)
+    {
+        var type = item.GetType();
+        var property = type.GetProperty(keyValueText.key, BindingFlags.Instance | BindingFlags.Public | BindingFlags.SetProperty);
+        if (property is null)
+            property = type.GetProperty(keyValueText.key.ToPascalCase(), BindingFlags.Instance | BindingFlags.Public | BindingFlags.SetProperty);
+
+        if (property is null)
+            return;
+
+        var (canParse, value) = TypeParser.TryParse(property.PropertyType, keyValueText.valueText);
+        if (!canParse || value is null)
+            return;
+
+        property.SetValue(item, value);
     }
 }
