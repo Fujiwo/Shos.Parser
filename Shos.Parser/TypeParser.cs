@@ -185,8 +185,7 @@ public class TypeParser
         try {
             // Attempt to parse using the main Parse method
             // If successful, return true with the parsed result
-            var result = Parse(type, text);
-            return (true, result);
+            return (true, Parse(type, text));
         } catch (Exception) {
             // If any exception occurs during parsing, return false with null result
             // This includes all possible exceptions from Parse method:
