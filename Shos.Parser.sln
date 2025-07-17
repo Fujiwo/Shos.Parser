@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36301.6 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shos.Parser", "Shos.Parser\Shos.Parser.csproj", "{D11617D8-22FE-4719-A37F-27E678D484FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shos.ParserTests", "Shos.ParserTests\Shos.ParserTests.csproj", "{9AE2E088-8E1A-4219-8C66-4774AC02F0F7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D11617D8-22FE-4719-A37F-27E678D484FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D11617D8-22FE-4719-A37F-27E678D484FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D11617D8-22FE-4719-A37F-27E678D484FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D11617D8-22FE-4719-A37F-27E678D484FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AE2E088-8E1A-4219-8C66-4774AC02F0F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AE2E088-8E1A-4219-8C66-4774AC02F0F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AE2E088-8E1A-4219-8C66-4774AC02F0F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AE2E088-8E1A-4219-8C66-4774AC02F0F7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {701579E6-3CE5-418F-9575-B51F9BFD06A8}
+	EndGlobalSection
+EndGlobal
