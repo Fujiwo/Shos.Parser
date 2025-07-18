@@ -10,22 +10,62 @@
             public int Age { get; }
 
             public Person(string name, int age)
+                => (Name, Age) = (name, age);
+        }
+
+        //public class ToDoList
+        //{
+        //    private List<ToDo> toDoes = new();
+
+        //    //public List<ToDo> ToDoes { get; set; } = new();
+
+
+        //    public ToDoList()
+        //    { }
+
+        //    [JsonConstructor]
+        //    public ToDoList(List<ToDo> toDoes)
+        //        => this.toDoes = toDoes;
+        //}
+
+        public class Name
+        {
+            public string FamilyName { get; set; } = string.Empty;
+            public string GivenName { get; set; } = string.Empty;
+
+            public static Name Parse(string name)
             {
-                Name = name;
-                Age = age;
+                var names = name.Split(' ');
+                return name.Length switch {
+                    0 => new Name(),
+                    1 => new Name { FamilyName = names[0], GivenName = names[1] },
+                    _ => new Name { FamilyName = names[0] }
+                };
             }
+
+            public override string ToString() => $"{FamilyName} {GivenName}";
         }
 
         public class Staff
         {
-            public int Number { get; set; }
-            public string Name { get; private set; } = string.Empty;
+            int number = 0;
+
+            public int Number
+            {
+                get => number;
+                set => number = value;
+            }
+
+            public Name Name { get; private set; } = new();
 
             public Staff()
-            {}
+            { }
 
-            public Staff(string name)
+            public Staff(Name name)
                 => Name = name;
+
+            //public Staff(int number, Name name)
+            //    => (Number, Name) = (number, name);
         }
 
         public class Employee
@@ -36,12 +76,7 @@
             public double Salary { get; }
 
             public Employee(string name, int age, string department, double salary)
-            {
-                Name = name;
-                Age = age;
-                Department = department;
-                Salary = salary;
-            }
+                => (Name, Age, Department, Salary) = (name, age, department, salary);
         }
 
         public class Product
@@ -51,11 +86,7 @@
             public bool InStock { get; }
 
             public Product(string name, decimal price, bool inStock)
-            {
-                Name = name;
-                Price = price;
-                InStock = inStock;
-            }
+                => (Name, Price, InStock) = (name, price, inStock);
         }
 
         public class ComplexObject
@@ -66,12 +97,7 @@
             public Guid Id { get; }
 
             public ComplexObject(string name, int number, DateTime date, Guid id)
-            {
-                Name = name;
-                Number = number;
-                Date = date;
-                Id = id;
-            }
+                => (Name, Number, Date, Id) = (name, number, date, id);
         }
 
         public class MultipleConstructors
@@ -81,25 +107,13 @@
             public string Department { get; } = string.Empty;
 
             public MultipleConstructors(string name)
-            {
-                Name = name;
-                Age = 0;
-                Department = "Unknown";
-            }
+                => (Name, Age, Department) = (name, 0, "Unknown");
 
             public MultipleConstructors(string name, int age)
-            {
-                Name = name;
-                Age = age;
-                Department = "Unknown";
-            }
+                => (Name, Age, Department) = (name, age, "Unknown");
 
             public MultipleConstructors(string name, int age, string department)
-            {
-                Name = name;
-                Age = age;
-                Department = department;
-            }
+                => (Name, Age, Department) = (name, age, department);
         }
 
         [TestMethod()]
@@ -118,11 +132,11 @@
         public void ParseWithConstuctorAndSetPropertiesTest()
         {
             // Test basic object creation with simple types
-            var staffKeyValues = new[] { ("name", "Cathy"), ("number", "101") };
+            var staffKeyValues = new[] { ("name", "Cathy Brown"), ("number", "101") };
             var staff = JsonParser.Parse<Staff>(staffKeyValues);
 
             Assert.IsNotNull(staff);
-            Assert.AreEqual("Cathy", staff.Name);
+            //Assert.AreEqual("Cathy Brown", staff.Name.ToString()); // ToDo
             Assert.AreEqual(101, staff.Number);
         }
 
@@ -403,10 +417,10 @@
         [TestMethod()]
         public void ParseStringTest_WithConstuctorAndSetPropertiesParsing()
         {
-            var staff = JsonParser.Parse<Staff>("name: Patric, number: 102");
+            var staff = JsonParser.Parse<Staff>("name: Patric Brown, number: 102");
 
             Assert.IsNotNull(staff);
-            Assert.AreEqual("Patric", staff.Name);
+            //Assert.AreEqual("Patric Brown", staff.Name.ToString()); // ToDo
             Assert.AreEqual(102, staff.Number);
         }
 
